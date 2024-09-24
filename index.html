@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firdaus Kitchen Official</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            background-color: #ffe6f0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #ff80ab;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 5px solid #d1477a;
+        }
+        header img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        nav {
+            text-align: center;
+            margin: 40px 0;
+        }
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff80ab;
+            color: #f8d6e5;
+            border-top: 5px solid #d1477a;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="Logo produk.jpg" alt="Logo Website">
+        <h1>Firdaus Kitchen</h1>
+        <p>Rasa yang Berbicara, Cita Rasa yang Bersahaja</p>
+    </header>
+    
+    <nav>
+        <a href="#section1">Tentang kami</a> 
+        <a href="#section2">Menu</a> 
+        <a href="#section3">Pelayanan</a>
+        <a href="#order-form">Pesan Sekarang</a>
+    </nav>
+    
+    <section id="section1">
+        <h2>Tentang kami</h2>
+        <p>Kami menyediakan makanan berkualitas tinggi dengan cita rasa yang lezat.</p>
+    </section>
+    
+    <section id="section2">
+        <h2>Menu</h2>
+        <p>Cek menu makanan kami yang bervariasi.</p>
+    </section>
+    
+    <section id="section3">
+        <h2>Pelayanan</h2>
+        <p>Kami melayani pengantaran makanan dengan cepat dan tepat waktu.</p>
+    </section>
+    
+    <section id="order-form">
+        <h2>Form Pemesanan</h2>
+        <form id="orderForm">
+            <input type="text" id="name" placeholder="Nama" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="product" placeholder="Produk" required>
+            <button type="submit">Kirim Pesanan</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Firdaus Kitchen. Semua Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const product = document.getElementById('product').value;
+
+            const order = { name, email, product };
+
+            // Kirim pesanan ke server
+            fetch('/api/order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Pesanan berhasil dikirim!');
+                    this.reset();
+                } else {
+                    alert('Gagal mengirim pesanan.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan.');
+            });
+        });
+    </script>
+</body>
+</html>
